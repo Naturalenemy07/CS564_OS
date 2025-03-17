@@ -1,17 +1,17 @@
-class Register_Mem:
+class Register:
     # Register memory
-    pass
+    def __init__(self, size = 8):
+        self.memory = [0] * size
 
-class Cache_Mem:
+class Cache:
     # Cache memory
-    pass
+    def __init__(self, size = 1024):
+        self.memory = [0] * size
 
-class Main_Mem:
+class Main:
     # RAM
-    pass
-class Disk_Mem:
-    # Disk Memory
-    pass
+    def __init__(self, size = 1048576):
+        self.memory = [0] * size
 
 def load_mem():
     pass
