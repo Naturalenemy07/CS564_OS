@@ -35,7 +35,7 @@ class Main:
     def __init__(self, size = RAM_SIZE, stack_size = STACK_SIZE):
         self.memory = [0] * size
         self.stack_pointer = size - 1
-        self.stack_top = size - stack_size
+        self.stack_top_index = size - stack_size - 1
 
     def read(self, address):
         """Reads value at address and returns"""
@@ -47,8 +47,11 @@ class Main:
     
     def push(self, value):
         """Pushes value to top of stack"""
-        self.memory[self.stack_pointer] = value
-        self.stack_pointer -= 1
+        if self.stack_pointer <= self.stack_top_index:
+            print("Memory Error: Push tried to access outside of the stack")
+        else:
+            self.memory[self.stack_pointer] = value
+            self.stack_pointer -= 1
 
     def pop(self):
         """Pops value off top of stack"""
