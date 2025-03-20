@@ -47,7 +47,7 @@ class Main:
     
     def push(self, value):
         """Pushes value to top of stack"""
-        if self.stack_pointer <= self.stack_top_index:
+        if self.stack_pointer <= self.stack_top_index: # Prevents push access outside of designated stack
             print("Memory Error: Push tried to access outside of the stack")
         else:
             self.memory[self.stack_pointer] = value
@@ -55,7 +55,10 @@ class Main:
 
     def pop(self):
         """Pops value off top of stack"""
-        self.stack_pointer += 1
-        temp_value = self.memory[self.stack_pointer]
-        self.memory[self.stack_pointer] = 0
-        return temp_value
+        if self.stack_pointer <= self.stack_top_index: # Prevents pop access outside of designated stack
+            print("Memory Error: Pop tried to access outside of the stack")
+        else:
+            self.stack_pointer += 1
+            temp_value = self.memory[self.stack_pointer]
+            self.memory[self.stack_pointer] = 0
+            return temp_value
