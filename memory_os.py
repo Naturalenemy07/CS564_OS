@@ -43,6 +43,8 @@ class Main:
 
     def write(self, value, address):
         """Writes a value at a designated position"""
+        if address >= self.stack_top_index: # Prevents memory access inside the designated stack
+            print("Memory Error: Tried to write inside the stack")
         self.memory[address] = value
     
     def push(self, value):
