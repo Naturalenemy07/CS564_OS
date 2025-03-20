@@ -1,6 +1,12 @@
+# Constants
+REGISTER_SIZE = 8
+CACHE_SIZE = 1024
+RAM_SIZE = 1048576
+STACK_SIZE = 1024
+
 class Register:
     # Register memory
-    def __init__(self, size = 8):
+    def __init__(self, size = REGISTER_SIZE):
         self.memory = [0] * size
 
     def read(self, address):
@@ -13,33 +19,40 @@ class Register:
 
 class Cache:
     # Cache memory
-    def __init__(self, size = 1024):
+    def __init__(self, size = CACHE_SIZE):
         self.memory = [0] * size
 
     def read(self, address):
         """Reads value at address and returns"""
         return self.memory[address]
 
-    def write():
-        pass
+    def write(self, value, address):
+        """Writes a value at a designated position"""
+        self.memory[address] = value
 
 class Main:
     # RAM
-    def __init__(self, size = 1048576):
+    def __init__(self, size = RAM_SIZE, stack_size = STACK_SIZE):
         self.memory = [0] * size
+        self.stack_pointer = size - 1
+        self.stack_top = size - stack_size
 
     def read(self, address):
         """Reads value at address and returns"""
         return self.memory[address]
 
-    def write():
-        pass
+    def write(self, value, address):
+        """Writes a value at a designated position"""
+        self.memory[address] = value
+    
+    def push(self, value):
+        """Pushes value to top of stack"""
+        self.memory[self.stack_pointer] = value
+        self.stack_pointer -= 1
 
-    def defragment_mem():
-        pass
-
-r1 = Register()
-r1.write(10,0)
-r1.write(20,4)
-for i in range(8):
-    print(r1.read(i))
+    def pop(self):
+        """Pops value off top of stack"""
+        self.stack_pointer += 1
+        temp_value = self.memory[self.stack_pointer]
+        self.memory[self.stack_pointer] = 0
+        return temp_value
