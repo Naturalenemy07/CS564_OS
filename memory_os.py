@@ -7,28 +7,28 @@ STACK_SIZE = 1024
 class Register:
     # Register memory
     def __init__(self, size = REGISTER_SIZE):
-        self.memory = [0] * size
+        self.reg_memory = [0] * size
 
-    def read(self, address):
+    def read(self, reg_address):
         """Reads value at address and returns"""
-        return self.memory[address]
+        return self.reg_memory[reg_address]
 
-    def write(self, value, address):
+    def write(self, value, reg_address):
         """Writes a value at a designated position"""
-        self.memory[address] = value
+        self.reg_memory[reg_address] = value
 
 class Cache:
     # Cache memory
     def __init__(self, size = CACHE_SIZE):
-        self.memory = [0] * size
+        self.cac_memory = [0] * size
 
-    def read(self, address):
+    def read(self, cac_address):
         """Reads value at address and returns"""
-        return self.memory[address]
+        return self.cac_memory[cac_address]
 
-    def write(self, value, address):
+    def write(self, value, cac_address):
         """Writes a value at a designated position"""
-        self.memory[address] = value
+        self.cac_memory[cac_address] = value
 
 class Main:
     # RAM
