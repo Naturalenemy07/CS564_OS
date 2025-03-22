@@ -11,11 +11,15 @@ class Register:
 
     def read(self, reg_address):
         """Reads value at address and returns"""
-        return self.reg_memory[reg_address]
+        if 0 <= reg_address < len(self.reg_memory):
+            return self.reg_memory[reg_address]
+        else:
+            print("Memory Error: Tried to access outside of register")
 
     def write(self, value, reg_address):
         """Writes a value at a designated position"""
-        self.reg_memory[reg_address] = value
+        if 0 <= reg_address < len(self.reg_memory):
+            self.reg_memory[reg_address] = value
 
 class Cache:
     # Cache memory
