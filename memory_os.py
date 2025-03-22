@@ -1,7 +1,7 @@
 # Constants
 REGISTER_SIZE = 8
 CACHE_SIZE = 1024
-RAM_SIZE = 1048576
+RAM_SIZE = 16384
 STACK_SIZE = 1024
 
 class Register:
@@ -24,11 +24,17 @@ class Cache:
 
     def read(self, cac_address):
         """Reads value at address and returns"""
-        return self.cac_memory[cac_address]
+        if 0 <= cac_address < len(self.cac_memory):
+            return self.cac_memory[cac_address]
+        else:
+            print("Memory Error: Tried to read outside the cache")
 
     def write(self, value, cac_address):
         """Writes a value at a designated position"""
-        self.cac_memory[cac_address] = value
+        if 0 <= cac_address < len(self.cac_memory):
+            self.cac_memory[cac_address] = value
+        else:
+            print("Memory Error: tried to write outside of cache")
 
 class Main:
     # RAM
